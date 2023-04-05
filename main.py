@@ -58,4 +58,4 @@ while True:
         print("Thank you for shopping with us <3")
         break
     else:
-        print("Wrong input")
+        print("\033[31mWrong Input!\033[0m")
