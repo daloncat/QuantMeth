@@ -2,11 +2,11 @@ import csv
 import time
 from os import system, name
 
-
 # Define the name of the file
 FILENAME = "Products.csv"
 TOTALSUM = 0
 
+#This function is used to clear the console from previous interactions
 def clear():
 	# for windows
 	if name == 'nt':
@@ -26,14 +26,14 @@ def searchProduct():
             print("Preis per kilogramm: ", row[2],  "\nPreis: ", row[3])
             preiskg = row[2]
             preis = row[3]
-            relevance= input("Is the price per kilogramm relevant for this product? Y/N: ")
-            if relevance == "Y":
-                gewicht = input("Please input the amount you wish: ")
+            if preis == "0":
+                gewicht = input("How many kilogramms do you want to buy? ")
                 summe = round(float(gewicht) * float(preiskg), 3)
                 print(summe)
                 TOTALSUM = TOTALSUM + summe
-            elif relevance == "N":
+            else:
                 summe = round(float(preis), 3)
+                print("Total price for your product: ", summe)
                 TOTALSUM = TOTALSUM + summe
             found_product = True
     if not found_product:
