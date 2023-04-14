@@ -58,7 +58,7 @@ def listproducts():
 #            found_category = True
 #
 #    if not found_category:
-#        print("\033[31mFehler\033[0m")   
+#        print("\033[31mFehler\033[0m")
 
 clear()
 
@@ -70,8 +70,12 @@ while True:
     print("\033[32mEnter 0 to quit.\033[0m")
     print("\033[33mCurrent price of all products:\033[0m ", TOTALSUM)
 
-    src=int(input("Enter here: "))
-
+    src_str = input("Enter here: ")
+    try:
+        src = int(src_str)
+    except ValueError:
+        print("\033[31mInvalid input! Please enter a number.\033[0m")
+        continue
     if src==1:
         searchProduct()
 #    elif src==2:
