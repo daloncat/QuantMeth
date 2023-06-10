@@ -2,6 +2,7 @@ import hashlib
 import csv
 import time
 from os import system, name
+from colorama import Fore, Back, Style
 
 # Define the name of the file
 FILENAME = "Products.csv"
@@ -70,42 +71,37 @@ def searchProduct():
 
     for row in csv_file:
         if len(row) >= 2 and product == row[1]:
-            print("Preis per kilogramm: ", row[2],  "\nPreis: ", row[3])
+            print(Fore.YELLOW + "Preis per kilogramm: ", row[2],  "\nPreis: ", row[3])
             preiskg = row[2]
             preis = row[3]
             if preis == "0":
-                gewicht = input("How many kilogramms do you want to buy? ")
+                gewicht = input( Fore.YELLOW + "How many kilogramms do you want to buy? ")
                 summe = round(float(gewicht) * float(preiskg), 3)
-                print(summe)
+                print("The total price for your product: ", summe)
                 TOTALSUM = TOTALSUM + summe
             else:
-                summe = round(float(preis), 3)
-                print("Total price for your product: ", summe)
+                amount = input("How many do you want to buy?")
+                summe = round(float(amount) * float(preis), 3)
+                print(Fore.GREEN + "Total price for your product: ", summe)
                 TOTALSUM = TOTALSUM + summe
             found_product = True
     if not found_product:
-        print("\033[31mProduct was not found in the database!\033[0m")
+        print(Fore.RED + "Product was not found in the database!")
+    print(Style.RESET_ALL)
 
 def listproducts():
     print("We have following products in stock:")
 
     csv_file = csv.reader(open(FILENAME), delimiter=';')
     for row in csv_file:
-        print("\033[35m", row[1], "\033[35m")
+        print(Fore.MAGENTA + row[1])
     time.sleep(2.5)
+    print(Style.RESET_ALL)
 
-#def searchCategory():
-#    product = input("Nach welcher Kategorie möchtest du ausschau halten?\n")
-#    csv_file = csv.reader(open(filename))
-#    found_category = False
-#
-#    for row in csv_file:
-#        if product==row[0]:
-#            print(row)
-#            found_category = True
-#
-#    if not found_category:
-#        print("\033[31mFehler\033[0m")
+def print_ascii(fn):
+    f= open(fn,'r')
+    print(''.join([line for line in f]))
+
 
 login_system = LoginSystem("password.txt")
 clear()
@@ -113,38 +109,43 @@ while True:
     action = input("Do you want to register or login? ")
     if action == "register":
         login_system.register()
+
     elif action == "login":
         if login_system.login():
-            # do something after login
             clear()
             print("Login Succesful!")
-            while True:
-                print("\033[37m############################################\033[0m")
-                print("Welcome to our shopping simulator!")
-                print("\033[37m############################################\033[0m")
-                print("\033[32mEnter 1 to search for Product Name:\033[0m")
-#    print("\033[32mEnter 2 to search for a category:\033[0m")
-                print("\033[32mEnter 3 to get a list of all items.\033[0m")
-                print("\033[32mEnter 0 to quit.\033[0m")
-                print("\033[33mCurrent price of all products:\033[0m ", TOTALSUM)
 
+            while True:
+                print_ascii('Heading.txt')
+                print(Fore.GREEN + "Enter 1 to search for product name")
+                print("Enter 2 to get a list of all items")
+                print("Enter 0 to quit")
+                print(Fore.CYAN + "Current price of all products: ", TOTALSUM)
+                print(Style.RESET_ALL)
                 src_str = input("Enter here: ")
+
                 try:
                     src = int(src_str)
+
                 except ValueError:
-                    print("\033[31mInvalid input! Please enter a number.\033[0m")
+                    print(Fore.RED + "Invalid input! Please enter a number.")
+                    print(Style.RESET_ALL)
                     continue
+
                 if src==1:
                     searchProduct()
-#               elif src==2:
-#                   searchCategory()
-                elif src==3:
+
+                elif src==2:
                     listproducts()
+
                 elif src == 0:
                     print("Thank you for shopping with us <3")
+                    print("Your have groceries worth: ", TOTALSUM)
                     break
+
                 else:
-                    print("\033[31mWrong Input!\033[0m")
+                    print(Fore.RED + "Invalid input! Please enter a number.")
+                    print(Style.RESET_ALL)
             break
     else:
         print("Invalid action. Please enter 'register' or 'login'.")
