@@ -1,10 +1,11 @@
 Category;Product_Name;Price_per_kilo;Price
 Beauty;Deoderant Old Spice;0;3
-Dairy;Schlagsahne;0;1.5
+Dairy;Cream;0;1.5
 Dairy;Butter;3;0
 Noodles;Spaghetti;1.6;0
 Noodles;Lasagna;2.5;0
 Fruits;Banana;1.2;0
 Dairy;Emmentaler;2.5;0
-Meat;Gulasch Gemischt;10;0
-Meat;Hackfleich Rind;10;0
+Meat;Goulash;10;0
+Meat;Ground Meat;10;0
+Drink;Cola;0;1.5

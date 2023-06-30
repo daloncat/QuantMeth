@@ -71,11 +71,11 @@ def searchProduct():
 
     for row in csv_file:
         if len(row) >= 2 and product == row[1]:
-            print(Fore.YELLOW + "Preis per kilogramm: ", row[2],  "\nPreis: ", row[3])
+            print(Fore.YELLOW + "Price per kilogram: ", row[2],  "\nPrice per piece: ", row[3])
             preiskg = row[2]
             preis = row[3]
             if preis == "0":
-                gewicht = input( Fore.YELLOW + "How many kilogramms do you want to buy? ")
+                gewicht = input( Fore.YELLOW + "How many kilograms do you want to buy? ")
                 summe = round(float(gewicht) * float(preiskg), 3)
                 print("The total price for your product: ", summe)
                 TOTALSUM = TOTALSUM + summe
@@ -95,7 +95,7 @@ def listproducts():
     csv_file = csv.reader(open(FILENAME), delimiter=';')
     for row in csv_file:
         print(Fore.MAGENTA + row[1])
-    time.sleep(2.5)
+    time.sleep(10)
     print(Style.RESET_ALL)
 
 def print_ascii(fn):
